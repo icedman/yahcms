@@ -5,6 +5,8 @@ import Login from '@/pages/Login'
 import Forget from '@/pages/Forget'
 import Register from '@/pages/Register'
 import Profile from '@/pages/Profile'
+import Vendors from '@/pages/Vendors'
+import Vendor from '@/pages/Vendor'
 
 Vue.use(Router)
 
@@ -42,6 +44,22 @@ export default new Router({
       component: SimplePage,
       meta: {
         post_type: 'posts',
+        layout: 'app-splitter'
+      }
+    },
+    {
+      path: '/vendors',
+      name: 'vendors',
+      component: Vendors,
+      meta: {
+        layout: 'app-splitter'
+      }
+    },
+    {
+      path: '/vendors/:id',
+      name: 'vendors',
+      component: Vendor,
+      meta: {
         layout: 'app-splitter'
       }
     },

@@ -2,30 +2,27 @@
   <v-ons-page>
     <custom-toolbar modifier="white-content">
       {{ title }}
-      <v-ons-toolbar-button slot="right" modifier="white-content" @click="$store.commit('splitter/toggle')">
+      <v-ons-toolbar-button slot="left" modifier="white-content" @click="$store.commit('splitter/toggle')">
         <v-ons-icon icon="ion-navicon, material:md-menu"></v-ons-icon>
       </v-ons-toolbar-button>
     </custom-toolbar>
 
     <!-- <v-ons-progress-bar indeterminate :value="progress"></v-ons-progress-bar> -->
 
-    <v-ons-tabbar>
+    <div class="content" v-if="(!tabs || !tabs.length)">
+    <router-view v-if="show"></router-view>
+    </div>
+
+    <v-ons-tabbar v-if="(tabs && tabs.length)">
       <template slot="pages">
         <div class="content">
-
-  <!--
-    <v-ons-modal :visible="$store.state.ui.offers">
-      <reda_homepage_slides alias="reda" slider="1"></reda_homepage_slides>
-    </v-ons-modal>
-  -->
-
           <router-view v-if="show"></router-view>
         </div>
       </template>
       <v-ons-tab v-for="(t, idx) in tabs" :key="idx"
         :label="t.label"
         :icon="t.icon"
-        :active="$store.state.route.name && $store.state.route.name.includes(t.name)"
+        :active="isTabActive(t)"
         @click.prevent="tab(t)"
       ></v-ons-tab>
     </v-ons-tabbar>
@@ -59,10 +56,10 @@ export default {
           path: '/pages/'
         },
         {
-          name: 'book',
-          label: 'Book',
+          name: 'vendors',
+          label: 'Vendors',
           icon: 'fa-bed',
-          path: '/pages/book-now'
+          path: '/vendors'
         },
         {
           name: 'offers',
@@ -91,6 +88,10 @@ export default {
           this.$store.commit('ui/setOffers', true)
         }
       }
+    },
+
+    isTabActive (tab) {
+      return this.$store.state.route.path && this.$store.state.route.path === tab.path
     }
   },
 
@@ -117,4 +118,7 @@ export default {
 </script>
 
 <style>
+.ons-swiper-target {
+  transform: none !important;
+}
 </style>

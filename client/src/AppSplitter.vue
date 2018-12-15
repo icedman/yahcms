@@ -1,9 +1,11 @@
 <template>
   <v-ons-page>
     <v-ons-splitter>
-      <v-ons-splitter-side swipeable side="right" collapse width="260px" :swipe-target-width="md && 25"
-        animation="overlay"
-        :open.sync="isOpen">
+      <v-ons-splitter-side swipeable side="left" collapse width="260px" :swipe-target-width="md && 25"
+        :animation="md ? 'overlay' : 'reveal'"
+        :open.sync="isOpen"
+      >
+        >
         <menu-page></menu-page>
       </v-ons-splitter-side>
 
@@ -38,6 +40,6 @@ export default {
 
 <style>
 ons-splitter-side[animation="overlay"] {
-  border-left: 1px solid #bbb;
+  border-right: 1px solid #bbb;
 }
 </style>

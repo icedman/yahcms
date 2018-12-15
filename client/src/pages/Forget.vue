@@ -1,5 +1,5 @@
 <template>
-  <ion-content style="background:red;">
+  <v-ons-page>
 
     <div class="wrapper">
       <div class="login-container">
@@ -20,7 +20,7 @@
       </div>
     </div>
 
-  </ion-content>
+  </v-ons-page>
 </template>
 
 <script>

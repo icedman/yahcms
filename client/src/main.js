@@ -18,7 +18,6 @@ import 'onsenui/css/onsen-css-components.css'
 // import 'onsenui/css/onsenui.css'; // Onsen UI basic CSS
 // import 'onsenui/css/onsen-css-components.css'; // Default Onsen UI CSS components
 import './onsen-css-components.css' // Onsen UI CSS components source for custom themes (requires cssnext)
-import './vue-onsenui-kitchensink.css' // CSS specific to this app
 
 // layouts
 import CustomToolbar from './partials/CustomToolbar'
@@ -32,6 +31,7 @@ import _ from 'lodash'
 import Firebase from '@/lib/firebase'
 import WordPress from '@/lib/wordpress'
 import WebCache from '@/lib/cache'
+import CmsAPI from '@/lib/cmsapi'
 
 // -----------------------------
 
@@ -76,6 +76,8 @@ router.afterEach((to, from) => {
 })
 
 /* cordova */
+// see ons.ready
+// https://onsen.io/v2/guide/cordova.html#cordova-specific-features
 document.addEventListener('deviceready', onDeviceReady, false)
 function onDeviceReady () {
   store.commit('SET_DEVICE_READY', true)
@@ -106,11 +108,12 @@ new Vue({
     window.$app = this
 
     // Shortcut for Material Design
-    Vue.prototype.md = this.$ons.platform.isAndroid()
+    Vue.prototype.md = true // this.$ons.platform.isAndroid()
     Vue.prototype.$http = Axios
     Vue.prototype.$firebase = Firebase
     Vue.prototype.$wp = WordPress
     Vue.prototype.$cache = WebCache
+    Vue.prototype.$cms = CmsAPI
 
     /* cordova */
     document.addEventListener('deviceready', onDeviceReady, false)
